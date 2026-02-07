@@ -4,7 +4,11 @@ import java.util.*;
 
 public class Timetable {
 
-    private /* как это хранить??? */ timetable;
+    private Map<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession> > > timetable;
+
+    public Timetable() {
+        timetable = new HashMap<>();
+    }
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
         //сохраняем занятие в расписании
