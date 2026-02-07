@@ -75,6 +75,8 @@ public class TimetableTest {
         Assertions.assertEquals(1, timetable.getTrainingSessionsForDayAndTime(DayOfWeek.MONDAY,
                 new TimeOfDay(13, 0)).size());
         //Проверить, что за понедельник в 14:00 не вернулось занятий
+        Assertions.assertTrue(timetable.getTrainingSessionsForDayAndTime(DayOfWeek.MONDAY,
+                new TimeOfDay(14, 0)).isEmpty());
     }
 
 }
