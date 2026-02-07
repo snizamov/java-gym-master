@@ -19,9 +19,9 @@ public class Timetable {
         DayOfWeek dayOfWeek = trainingSession.getDayOfWeek();
         TimeOfDay timeOfDay = trainingSession.getTimeOfDay();
 
-        TreeMap<TimeOfDay, List<TrainingSession>> dayListTreeMap = timetable.get(dayOfWeek);
+        DayTimetable dayListTreeMap = timetable.get(dayOfWeek);
         if (dayListTreeMap == null) {
-            dayListTreeMap = new TreeMap<>();
+            dayListTreeMap = new DayTimetable();
             timetable.put(dayOfWeek, dayListTreeMap);
         }
 
@@ -34,9 +34,9 @@ public class Timetable {
         trainingSessionList.add(trainingSession);
     }
 
-    public /* непонятно, что возвращать */ getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
+    public List<TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
-        TreeMap<TimeOfDay, List<TrainingSession>> dayListTreeMap = timetable.get(dayOfWeek);
+        DayTimetable dayListTreeMap = timetable.get(dayOfWeek);
         if (dayListTreeMap == null) {
             return new ArrayList<>();
         }
@@ -48,9 +48,9 @@ public class Timetable {
         return trainingSessionList;
     }
 
-    public /* непонятно, что возвращать */ getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
+    public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
-        TreeMap<TimeOfDay, List<TrainingSession>> dayListTreeMap = timetable.get(dayOfWeek);
+        DayTimetable dayListTreeMap = timetable.get(dayOfWeek);
         if (dayListTreeMap == null) {
             return new ArrayList<>();
         }
@@ -63,7 +63,7 @@ public class Timetable {
 
     public Map<Coach, Integer> getCountByCoaches() {
         Map<Coach, Integer> countByCoaches = new HashMap<>();
-        for (TreeMap<TimeOfDay, List<TrainingSession>> day : timetable.values()) {
+        for (DayTimetable day : timetable.values()) {
             for (List<TrainingSession> time : day.values()) {
                 for (TrainingSession trainingSession : time) {
                     Coach coach = trainingSession.getCoach();
