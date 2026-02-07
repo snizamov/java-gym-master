@@ -4,7 +4,11 @@ import java.util.*;
 
 public class Timetable {
 
-    private Map<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession> > > timetable;
+    private static class DayTimetable extends TreeMap<TimeOfDay, List<TrainingSession>> {
+
+    }
+
+    private Map<DayOfWeek, DayTimetable> timetable;
 
     public Timetable() {
         timetable = new HashMap<>();
