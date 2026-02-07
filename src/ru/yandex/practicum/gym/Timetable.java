@@ -8,6 +8,22 @@ public class Timetable {
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
         //сохраняем занятие в расписании
+        DayOfWeek dayOfWeek = trainingSession.getDayOfWeek();
+        TimeOfDay timeOfDay = trainingSession.getTimeOfDay();
+
+        TreeMap<TimeOfDay, List<TrainingSession>> dayListTreeMap = timetable.get(dayOfWeek);
+        if (dayListTreeMap == null) {
+            dayListTreeMap = new TreeMap<>();
+            timetable.put(dayOfWeek, dayListTreeMap);
+        }
+
+        List<TrainingSession> trainingSessionList = dayListTreeMap.get(timeOfDay);
+        if (trainingSessionList == null) {
+            trainingSessionList = new ArrayList<>();
+            dayListTreeMap.put(timeOfDay, trainingSessionList);
+        }
+
+        trainingSessionList.add(trainingSession);
     }
 
     public /* непонятно, что возвращать */ getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
