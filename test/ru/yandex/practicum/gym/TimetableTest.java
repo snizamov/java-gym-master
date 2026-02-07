@@ -21,6 +21,7 @@ public class TimetableTest {
         //Проверить, что за понедельник вернулось одно занятие
         Assertions.assertEquals(1, timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY).size());
         //Проверить, что за вторник не вернулось занятий
+        Assertions.assertTrue(timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY).isEmpty());
     }
 
     @Test
