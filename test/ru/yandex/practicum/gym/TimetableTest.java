@@ -49,6 +49,7 @@ public class TimetableTest {
         timetable.addNewTrainingSession(saturdayChildTrainingSession);
 
         // Проверить, что за понедельник вернулось одно занятие
+        Assertions.assertEquals(1, timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY).size());
         // Проверить, что за четверг вернулось два занятия в правильном порядке: сначала в 13:00, потом в 20:00
         // Проверить, что за вторник не вернулось занятий
     }
