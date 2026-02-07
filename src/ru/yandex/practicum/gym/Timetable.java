@@ -52,4 +52,44 @@ public class Timetable {
         }
         return trainingSessionList;
     }
+
+    public Map<Coach, Integer> getCountByCoaches() {
+        Map<Coach, Integer> countByCoaches = new HashMap<>();
+        for (TreeMap<TimeOfDay, List<TrainingSession>> day : timetable.values()) {
+            for (List<TrainingSession> time : day.values()) {
+                for (TrainingSession trainingSession : time) {
+                    Coach coach = trainingSession.getCoach();
+                    if (countByCoaches.containsKey(coach)) {
+                        countByCoaches.put(coach, countByCoaches.get(coach) + 1);
+                    } else {
+                        countByCoaches.put(coach, 1);
+                    }
+                }
+            }
+        }
+
+        List<CounterOfTrainings> counterOfTrainingsList = new ArrayList<>();
+
+        for (Map.Entry<Coach, Integer> coach : countByCoaches.entrySet()) {
+            CounterOfTrainings counterOfTrainings = new CounterOfTrainings(coach.getKey(), coach.getValue());
+            counterOfTrainingsList.add(counterOfTrainings);
+        }
+
+        Comparator<CounterOfTrainings> comparatorCounterOfTrainings = new Comparator<CounterOfTrainings>() {
+            @Override
+            public int compare(CounterOfTrainings o1, CounterOfTrainings o2) {
+                return Integer.compare(o2.getCount(), o1.getCount());
+            }
+        };
+
+        counterOfTrainingsList.sort(comparatorCounterOfTrainings);
+
+        Map<Coach, Integer> sortedCountByCoaches = new LinkedHashMap<>();
+
+        for (CounterOfTrainings counter : counterOfTrainingsList) {
+            sortedCountByCoaches.put(counter.getCoach(), counter.getCount());
+        }
+
+        return sortedCountByCoaches;
+    }
 }
